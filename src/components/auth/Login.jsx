@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import Spinner from '../Spinner';
 
 import { loginUser } from '../../redux/users/authSlice';
 
@@ -13,7 +14,7 @@ const Login = () => {
   const [emailInput, setEmail] = React.useState('');
   const [passwordInput, setPassword] = React.useState('');
 
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, isLoading } = useSelector((state) => state.auth);
 
   React.useEffect(() => {
     if (isAuthenticated) {
@@ -50,36 +51,51 @@ const Login = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="container text-center d-flex justify-content-center align-items-center min-vh-100">
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <section className="loginContainer">
-      <form className="loginForm" onSubmit={handleSubmit}>
-        <h1 className="formTitle">User login</h1>
-        <div className="form-group">
-          <label htmlFor="email" aria-label="Email">
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              placeholder="Email"
-              value={emailInput}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </label>
+      {isLoading ? (
+        <div className=" text-center d-flex justify-content-center align-items-center min-vh-100">
+          <Spinner />
         </div>
-        <div className="form-group">
-          <label htmlFor="password" aria-label="Password">
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="Password"
-              value={passwordInput}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </label>
-        </div>
-        <button type="submit" className="btn btn-primary">Login</button>
-      </form>
+      )
+        : (
+          <form className="loginForm" onSubmit={handleSubmit}>
+            <h1 className="formTitle">User login</h1>
+            <div className="form-group">
+              <label htmlFor="email" aria-label="Email">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  placeholder="Email"
+                  value={emailInput}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label htmlFor="password" aria-label="Password">
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Password"
+                  value={passwordInput}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </label>
+            </div>
+            <button type="submit" className="btn btn-primary">Login</button>
+          </form>
+        )}
     </section>
   );
 };
