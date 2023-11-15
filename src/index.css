@@ -1,8 +1,6 @@
 /* Global Styles */
 
 :root {
-  margin-top: -1.5rem;
-
   /* Set your variables here */
   --green: #99c210;
   --green-rgba: rgba(153, 194, 16, 0.9);

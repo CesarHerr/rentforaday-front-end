@@ -18,16 +18,16 @@ const Login = () => {
 
   React.useEffect(() => {
     if (isAuthenticated) {
-      setTimeout(() => {
-        navigate('/items');
-      }, 2000);
+      navigate('/items');
     }
   }, [isAuthenticated, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!emailInput || !passwordInput) {
-      toast.error('All fields are required');
+      toast.error('All fields are required', {
+        duration: 5000,
+      });
     } else if (!emailInput.includes('@') || !emailInput.includes('.com')) {
       toast.error('The email is invalid');
     } else if (passwordInput.length < 8) {

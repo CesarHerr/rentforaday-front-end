@@ -35,7 +35,10 @@ export const loginUser = createAsyncThunk(
         // destructure the response data to get the token and user
         const token = response.headers.authorization;
         const user = response.data.data;
-        toast.success(`Successful login. Welcome, ${user.name}`);
+        toast.success(`Successful login. Welcome, ${user.name}`, {
+          icon: '👏',
+          duration: 5000,
+        });
         localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify(user));
         thunkAPI.dispatch(setToken(token));
