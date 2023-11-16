@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // to use toast notifications in the app
-import Toaster from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 // Elements for the router.
 import Root from './routes/root';
