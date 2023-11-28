@@ -51,7 +51,7 @@ function Splash() {
       >
         <SwiperSlide>
           <div className="slideContent slide1">
-            <Link to="/items" className="slideContent__link">
+            <Link to="/rentforaday-front-end/items" className="slideContent__link">
               See more
               {' '}
               <AiOutlineRightCircle />
@@ -62,7 +62,7 @@ function Splash() {
 
         <SwiperSlide>
           <div className="slideContent slide2">
-            <Link to="/items" className="slideContent__link">
+            <Link to="/rentforaday-front-end/items" className="slideContent__link">
               See more
               {' '}
               <AiOutlineRightCircle />
@@ -73,7 +73,7 @@ function Splash() {
 
         <SwiperSlide>
           <div className="slideContent slide3">
-            <Link to="/items" className="slideContent__link">
+            <Link to="/rentforaday-front-end/items" className="slideContent__link">
               See more
               {' '}
               <AiOutlineRightCircle />
@@ -84,7 +84,7 @@ function Splash() {
 
         <SwiperSlide>
           <div className="slideContent slide4">
-            <Link to="/items" className="slideContent__link">
+            <Link to="/rentforaday-front-end/items" className="slideContent__link">
               See more
               {' '}
               <AiOutlineRightCircle />
