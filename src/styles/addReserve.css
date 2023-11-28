@@ -97,6 +97,10 @@
       min-width: 30rem;
     }
   }
+
+  .itemContent {
+    flex-direction: row;
+  }
 }
 
 @media (max-width: 900px) {
@@ -132,7 +136,7 @@
       margin-bottom: 5rem;
 
       & img {
-        width: 70%;
+        width: 60%;
         max-width: 250px;
         border-radius: 10rem;
       }

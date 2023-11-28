@@ -1,24 +1,31 @@
 .deleteItemContent {
+  padding-left: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   width: 100%;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  overflow: hidden;
-  list-style: none;
-  padding: 0;
-  z-index: -1;
-  background: url('/src/assets/background-add.png') center center no-repeat;
+  background-image: url(../assets/city.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
+  z-index: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #98c210ce;
+  }
 }
 
 .div-list {
   max-width: 50rem;
   border-radius: 1rem;
-  background-color: rgba(0, 0, 0, 0);
-  backdrop-filter: blur(10px);
+  background-color: #8fb60f4f;
+  backdrop-filter: blur(6px);
   padding: 1rem;
   animation: appear 0.2s ease-in-out 0.1s forwards;
 }
@@ -28,21 +35,19 @@ div.deleteItemContent span {
   padding: 0.25rem 1rem;
   text-align: center;
   background-color: #fff;
-  color: rgba(152, 194, 16, 0.897);
-  border: 2px solid var(--green);
+  color: var(--green-hover);
+  border: 2px solid var(--green-hover);
   border-radius: 2rem;
-
-  /* background-color: rgba(153, 194, 16, 0.3); */
 }
 
 div.deleteItemContent button {
   border: 2px solid var(--green);
-  background-color: rgba(153, 194, 16, 0.3);
+  background-color: var(--green);
+  font-weight: bold;
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 2rem;
   transition: all 0.3s ease-in-out;
-  text-shadow: 0.3rem 0.3rem 0.3rem rgba(0, 0, 0, 0.5);
   filter: drop-shadow(-0.1rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1));
 }
 
