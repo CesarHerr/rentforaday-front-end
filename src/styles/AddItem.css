@@ -1,24 +1,33 @@
 .addItemCotent {
+  padding-left: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   width: 100%;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  overflow: hidden;
-  list-style: none;
-  padding: 0;
-  z-index: -1;
-  background: url('/src/assets/background-add.png') center center no-repeat;
+  background-image: url(../assets/city.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
+  z-index: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #98c210ce;
+  }
 }
 
 .div-form {
   max-width: 35rem;
+  border: 1px solid var(--green);
   border-radius: 1rem;
-  background-color: rgba(0, 0, 0, 0);
-  backdrop-filter: blur(10px);
-  padding: 1rem;
+  background-color: #98c2101c;
+  backdrop-filter: blur(6px);
+  padding: 3rem;
   animation: appear 0.2s ease-in-out 0.1s forwards;
 }
 
