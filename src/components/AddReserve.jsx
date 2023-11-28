@@ -71,11 +71,11 @@ const AddReserve = () => {
     itemContent = (<Spinner />);
   } else if (itemDetail) {
     itemContent = (
-      <div className="itemContent">
+      <div className="itemContent d-flex align-items-center justify-content-center">
         <img src={itemDetail.image} alt={itemDetail.name} />
         <div className="text-center">
-          <h2>{itemDetail.name}</h2>
-          <p>
+          <h2 className="fs-4 text-start w-75 mx-auto">{itemDetail.name}</h2>
+          <p className="fs-6 text-start w-75 mx-auto">
             {itemDetail.description}
           </p>
           <p className="fw-bold">

@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import Spinner from '../Spinner';
 
 import { registerUser, clearRegistration } from '../../redux/users/authSlice';
 
@@ -15,7 +16,7 @@ const Registration = () => {
   const [passwordInput, setPassword] = React.useState('');
   const [confirm, setConfirm] = React.useState('');
 
-  const { isRegistered } = useSelector((state) => state.auth);
+  const { isRegistered, isLoading } = useSelector((state) => state.auth);
 
   React.useEffect(() => {
     if (isRegistered) {
@@ -58,6 +59,14 @@ const Registration = () => {
       toast.error('Unknown error when registering the user.');
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="container text-center d-flex justify-content-center align-items-center min-vh-100">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <section className="loginContainer">
