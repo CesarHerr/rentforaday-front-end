@@ -194,6 +194,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## 👥 Authors <a name="authors"></a>
 
+👤 **Cesar Herrera**
+-   GitHub: [@CesarHerr](https://github.com/CesarHerr)
+-   LinkedIn: [Cesarherr](https://www.linkedin.com/in/cesarHerr/)
+
 👤 **Nicolas Bolañez**
 -   GitHub: [@Zven94](https://github.com/Zven94)
 -   LinkedIn: [Nico](https://www.linkedin.com/in/nicolas-emiliano/)
@@ -203,10 +207,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 - GitHub: [@Ruthmy](https://github.com/Ruthmy)
 - Twitter: [@rury_exe](https://twitter.com/rury_exe)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/ruth-abreu)
-
-👤 **Cesar Herrera**
--   GitHub: [@CesarHerr](https://github.com/CesarHerr)
--   LinkedIn: [Cesarherr](https://www.linkedin.com/in/cesarHerr/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
