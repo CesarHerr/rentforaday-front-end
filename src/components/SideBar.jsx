@@ -43,8 +43,7 @@ const Sidebar = () => {
             <img src={socialMediaIcons.Ham2} alt="button" />
           </button>
           <div className="offcanvas-header">
-            <NavLink to="/items" className="text-center w-100 mt-5">
-              {/* <p className="fs-3">Logo</p> */}
+            <NavLink to="/rentforaday-front-end/items" className="text-center w-100 mt-5">
               <img src="https://i.postimg.cc/85Q5RWmG/Logo-final.png" alt="Logo" className="w-50 fs-3" />
 
             </NavLink>
@@ -53,8 +52,8 @@ const Sidebar = () => {
             ? (
               <div className="offcanvas-body">
 
-                <NavLink to="delete_item"><p>Delete item</p></NavLink>
-                <NavLink to="add_item"><p>Add item</p></NavLink>
+                {/* <NavLink to="delete_item"><p>Delete item</p></NavLink>
+                <NavLink to="add_item"><p>Add item</p></NavLink> */}
                 <NavLink to="add_reserve" onClick={() => handleResetItemId()}><p>Add Reserve</p></NavLink>
                 <NavLink to="reservation_list"><p>My reservations</p></NavLink>
                 <NavLink
@@ -75,7 +74,7 @@ const Sidebar = () => {
                 </NavLink>
               </div>
             )}
-          <div className="navFooter">
+          <div className="navFooter text-center">
             <div className="text-center">
               <img src={socialMediaIcons.Facebook} alt="facebook" className="social" />
               <img src={socialMediaIcons.Pinterest} alt="pinterest" className="social" />
@@ -83,7 +82,7 @@ const Sidebar = () => {
               <img src={socialMediaIcons.Vimeo} alt="vimeo" className="social" />
               <img src={socialMediaIcons.Threads} alt="x" className="social" />
             </div>
-            <p>@ 2023 Ruth, Nico & César - Microverse</p>
+            <p className="text-center">@ 2023 - Microverse</p>
           </div>
         </div>
       </nav>

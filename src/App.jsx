@@ -18,44 +18,44 @@ import DeleteItem from './components/DeleteItem';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/rentforaday-front-end',
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
+        path: '/rentforaday-front-end',
         element: <Splash />,
       },
       {
-        path: 'items',
+        path: '/rentforaday-front-end/items',
         element: <Item />,
       },
       {
-        path: 'items/:itemId',
+        path: '/rentforaday-front-end/items/:itemId',
         element: <ItemDetail />,
       },
       {
-        path: 'registration',
+        path: '/rentforaday-front-end/registration',
         element: <Registration />,
       },
       {
-        path: 'login',
+        path: '/rentforaday-front-end/login',
         element: <Login />,
       },
       {
-        path: 'delete_item',
+        path: '/rentforaday-front-end/delete_item',
         element: <DeleteItem />,
       },
       {
-        path: 'add_item',
+        path: '/rentforaday-front-end/add_item',
         element: <AddItem />,
       },
       {
-        path: 'add_reserve',
+        path: '/rentforaday-front-end/add_reserve',
         element: <AddReserve />,
       },
       {
-        path: 'reservation_list',
+        path: '/rentforaday-front-end/reservation_list',
         element: <ReservationsList />,
       },
     ],

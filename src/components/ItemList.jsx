@@ -80,8 +80,8 @@ const Item = () => {
                   </div>
                   <p className="dots">...........</p>
                   <p className="reserveDescription">{item.description}</p>
-                  <button type="button" className="btn" onClick={() => navigate(`/items/${item.id}`)}>
-                    Ver más
+                  <button type="button" className="btn" onClick={() => navigate(`/rentforaday-front-end/items/${item.id}`)}>
+                    More info
                   </button>
                 </li>
 

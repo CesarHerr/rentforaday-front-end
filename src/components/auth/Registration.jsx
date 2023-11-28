@@ -23,7 +23,7 @@ const Registration = () => {
       toast.success('User registered successfully');
       setTimeout(() => {
         dispatch(clearRegistration());
-        navigate('/login');
+        navigate('/rentforaday-front-end/login');
       }, 2000);
     }
   }, [dispatch, isRegistered, navigate]);

@@ -18,7 +18,7 @@ const Login = () => {
 
   React.useEffect(() => {
     if (isAuthenticated) {
-      navigate('/items');
+      navigate('/rentforaday-front-end/items');
     }
   }, [isAuthenticated, navigate]);
 

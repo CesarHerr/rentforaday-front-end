@@ -38,8 +38,8 @@ const ItemDetail = () => {
               </tbody>
             </table>
             <div className="itemPanel w-100 d-flex flex-row justify-content-between align-items-center">
-              <Link to="/add_reserve" className="d-flex flex-column justify-content-center reserve-buttom" onClick={() => handleItemId()}>Reserve</Link>
-              <Link to="/" className="d-flex flex-column justify-content-center back-buttom">Back to items</Link>
+              <Link to="/rentforaday-front-end/add_reserve" className="d-flex flex-column justify-content-center reserve-buttom" onClick={() => handleItemId()}>Reserve</Link>
+              <Link to="/rentforaday-front-end/items" className="d-flex flex-column justify-content-center back-buttom">Back to items</Link>
             </div>
           </div>
         </div>

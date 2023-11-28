@@ -124,7 +124,7 @@ const AddReserve = () => {
 
   // redirect to reservation list if isReserved
   if (isReserved) {
-    navigate('/reservation_list');
+    navigate('/rentforaday-front-end/reservation_list');
     dispatch(setIsReserved());
   }
 
