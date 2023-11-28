@@ -9,6 +9,31 @@
   }
 }
 
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink-caret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* When you change the amount of characters in the h1, you have to change
+the with: 14ch and  steps(14, end), if there is 14 characters, put 14,
+if there is 20 put 20 */
+.animation {
+  font: bold 200% Consolas, Monaco, monospace;
+  border-right: 0.1em solid black;
+  width: 34ch;
+  margin: 2em 2em;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-animation: typing 5s steps(34, end), blink-caret 0.5s step-end infinite alternate;
+}
+
 @media (max-width: 768px) {
   .itemTitle {
     top: 0;
