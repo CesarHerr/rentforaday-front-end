@@ -1,30 +1,42 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Spinner from './Spinner';
-import { postItem } from '../redux/items/itemSlice';
+import { setFormData, setIsAdded } from '../redux/items/itemSlice';
+import { postItem } from '../redux/items/apiItem';
 import '../styles/AddItem.css';
 
 function AddItem() {
-  const { isLoading, message } = useSelector((state) => state.item);
+  const {
+    isLoading, error, formData, isAdded,
+  } = useSelector((state) => state.items);
   const dispatch = useDispatch();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    dispatch(setFormData({ ...formData, [name]: value }));
+  };
 
-    const form = event.target;
-    const formData = new FormData(form);
-
-    formData.append('item[name]', form.name.value);
-    formData.append('item[city]', form.city.value);
-    formData.append('item[description]', form.description.value);
-    formData.append('item[price]', form.price.value);
-    formData.append('item[image]', form.image.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(postItem(formData));
   };
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAdded) {
+      navigate('/rentforaday-front-end/items');
+      dispatch(setIsAdded());
+    }
+  }, [isAdded, navigate, dispatch]);
+
   if (isLoading) {
     return (
-      <div className="container text-center d-flex justify-content-center align-items-center min-vh-100">
-        <Spinner />
+      <div className="deleteItemContent">
+        <div className="div-list">
+          <Spinner />
+        </div>
       </div>
     );
   }
@@ -32,39 +44,39 @@ function AddItem() {
   return (
     <>
       <div className="addItemCotent d-flex flex-column justify-content-center align-items-center">
-        <h1 className="formTitle z-1 w-25">New Item</h1>
+        <h1 className="formTitle z-1 w-25">Add a house to rent</h1>
         <div className="d-flex p-3">
           <form className="div-form d-flex flex-column justify-content-center align-items-center gap-1">
             <div>
               <label htmlFor="name" className="form-label" aria-label="Name">
-                <input type="text" id="name" name="name" placeholder="Name" className="form-control" />
+                <input type="text" id="name" name="name" placeholder="Name" className="form-control" onChange={handleChange} />
               </label>
             </div>
             <div>
               <label htmlFor="city" className="form-label" aria-label="City">
-                <input type="text" id="city" name="city" placeholder="City" className="form-control" />
+                <input type="text" id="city" name="city" placeholder="City" className="form-control" onChange={handleChange} />
               </label>
             </div>
             <div>
               <label htmlFor="description" className="form-label" aria-label="Description">
-                <input type="text" id="description" name="description" placeholder="Description" className="form-control" />
+                <input type="text" id="description" name="description" placeholder="Description" className="form-control" onChange={handleChange} />
               </label>
             </div>
             <div>
               <label htmlFor="price" className="form-label" aria-label="Price">
-                <input type="text" id="price" name="price" placeholder="Price" className="form-control" />
+                <input type="text" id="price" name="price" placeholder="Price" className="form-control" onChange={handleChange} />
               </label>
             </div>
             <div>
               <label htmlFor="image" className="form-label" aria-label="Image">
-                <input type="text" id="image" name="image" placeholder="Image" className="form-control" />
+                <input type="text" id="image" name="image" placeholder="http://image.com" className="form-control" onChange={handleChange} />
               </label>
             </div>
-            <button type="submit" className="btn btn-primary" onClick={() => handleSubmit()}>Add Item</button>
+            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Add Item</button>
           </form>
         </div>
         <div className="div-message">
-          {message && <p>{message}</p>}
+          {error && <p>{error}</p>}
         </div>
       </div>
     </>
