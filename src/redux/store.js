@@ -6,7 +6,7 @@ import tokenReducer from './users/tokenSlice';
 
 const store = configureStore({
   reducer: {
-    item: itemReducer,
+    items: itemReducer,
     auth: authReducer,
     token: tokenReducer,
     reserves: reservesReducer,

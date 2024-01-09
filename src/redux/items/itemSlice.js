@@ -1,75 +1,93 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import itemAPI from '../../API/itemAPI';
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchItems, postItem, deleteItem } from './apiItem';
 
 const initialState = {
   items: [],
+  dataItem: [],
+  error: undefined,
   isLoading: false,
-};
-
-const fetchItems = createAsyncThunk(
-  'item/fetchItems',
-  async () => {
-    try {
-      const response = await axios.get(`${itemAPI.baseURL}${itemAPI.listItems}`);
-      return response.data;
-    } catch (error) {
-      throw new Error('Failed to fetch Items');
-    }
+  isDelete: false,
+  isAdded: false,
+  itemDetail: null,
+  itemsByCity: [],
+  formData: {
+    name: '',
+    city: '',
+    description: '',
+    price: '',
+    image: '',
   },
-);
-
-const postItem = createAsyncThunk('item/postItem', async (data, { rejectWithValue }) => {
-  try {
-    const options = {
-      method: 'POST',
-      url: `${itemAPI.baseURL}${itemAPI.listItems}`,
-      data,
-    };
-
-    const response = await axios.request(options);
-
-    if (response.status === 200) {
-      return 'Item added successfully!';
-    }
-    return rejectWithValue('Failed to add item');
-  } catch (error) {
-    return rejectWithValue(`Error: ${error.message}`);
-  }
-});
+};
 
 const itemSlice = createSlice({
   name: 'items',
   initialState,
-  reducers: {},
+  reducers: {
+    setFormData(state, action) {
+      state.formData = action.payload;
+    },
+    setDataItem(state, action) {
+      state.dataItem = action.payload;
+    },
+    setIsDelete(state) {
+      state.isDelete = false;
+    },
+    setIsAdded(state) {
+      state.isAdded = false;
+    },
+    setItemDetail(state, action) {
+      state.itemDetail = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchItems.fulfilled, (state, action) => {
         state.items = action.payload;
+        const uniqueCityObject = {};
+        state.items.forEach((item) => {
+          const { city } = item;
+          if (!uniqueCityObject[city]) {
+            uniqueCityObject[city] = item;
+          }
+        });
+        state.itemsByCity = Object.values(uniqueCityObject);
         state.isLoading = false;
       })
       .addCase(fetchItems.pending, (state) => {
         state.isLoading = true;
+        state.error = undefined;
       })
       .addCase(fetchItems.rejected, (state, action) => {
+        state.isLoading = false;
         state.error = action.error.message;
-        state.isLoading = false;
       })
-      .addCase(postItem.fulfilled, (state, action) => {
-        state.message = action.payload;
-        state.isLoading = false;
+      .addCase(postItem.fulfilled, (state) => {
+        state.isAdded = true;
       })
       .addCase(postItem.pending, (state) => {
         state.isLoading = true;
+        state.error = undefined;
       })
       .addCase(postItem.rejected, (state, action) => {
-        state.message = action.error.message;
         state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(deleteItem.fulfilled, (state, action) => {
+        state.isDelete = true;
+        state.items = state.items.filter((item) => item.id !== action.payload);
+      })
+      .addCase(deleteItem.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
+      .addCase(deleteItem.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
       });
   },
 });
 
 export default itemSlice.reducer;
-
-export { fetchItems, postItem };
+export const {
+  setFormData, setDataItem, setIsDelete, setIsAdded, setItemDetail,
+} = itemSlice.actions;
