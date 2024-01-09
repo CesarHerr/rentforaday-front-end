@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  fetchReserves, deleteReserve, fetchItems, postReserve,
+  fetchReserves, deleteReserve, postReserve,
 } from './apiReserves';
 
 const initialState = {
@@ -8,10 +8,7 @@ const initialState = {
   selectedCity: '',
   selectedDate: '',
   isReserved: false,
-  itemDetail: null,
   reserves: [],
-  items: [],
-  itemsByCity: [],
   isLoading: false,
   isDeleting: false,
   error: undefined,
@@ -31,10 +28,6 @@ const reserveSlice = createSlice({
     },
     setSelectedDate(state, action) {
       state.selectedDate = action.payload;
-    },
-    setItemDetail(state, action) {
-      const itemId = Object.values(state.items).find((object) => object.id === action.payload);
-      state.itemDetail = itemId;
     },
     setIsReserved(state) {
       state.isReserved = false;
@@ -78,29 +71,6 @@ const reserveSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message;
       })
-      .addCase(fetchItems.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.items = action.payload;
-        const uniqueCityObject = {};
-        state.items.forEach((item) => {
-          const { city } = item;
-          if (!uniqueCityObject[city]) {
-            uniqueCityObject[city] = item;
-          }
-        });
-        state.itemsByCity = Object.values(uniqueCityObject);
-
-        state.isLoading = false;
-        state.error = undefined;
-      })
-      .addCase(fetchItems.pending, (state) => {
-        state.isLoading = true;
-        state.error = undefined;
-      })
-      .addCase(fetchItems.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.error.message;
-      })
       .addCase(postReserve.fulfilled, (state) => {
         state.isLoading = false;
         state.isReserved = true;
@@ -119,7 +89,7 @@ const reserveSlice = createSlice({
 });
 
 export const {
-  setSelectedItem, setSelectedCity, setSelectedDate, setItemDetail,
+  setSelectedItem, setSelectedCity, setSelectedDate,
   setIsReserved, setStatus, setIsDeleting, setItemId,
 } = reserveSlice.actions;
 export default reserveSlice.reducer;
