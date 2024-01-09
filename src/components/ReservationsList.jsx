@@ -3,33 +3,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Virtual, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { fetchReserves, deleteReserve, fetchItems } from '../redux/reserves/apiReserves';
+import { fetchReserves, deleteReserve } from '../redux/reserves/apiReserves';
+import { fetchItems } from '../redux/items/apiItem';
 import { setIsDeleting } from '../redux/reserves/reserveSlice';
-import { setLocalStorage } from '../redux/users/authSlice';
 import icons from '../assets/icons';
-import '../styles/reservationList.css';
 import Spinner from './Spinner';
+import '../styles/reservationList.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 const ReservationsList = () => {
   const dispatch = useDispatch();
   const {
-    reserves, isDeleting, isLoading, items,
+    reserves, isDeleting, isLoading,
   } = useSelector((state) => state.reserves);
-  const { userStorage } = useSelector((state) => state.auth);
+  const { items } = useSelector((state) => state.items);
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   let reserveContent;
 
   useEffect(() => {
-    dispatch(fetchItems());
     dispatch(fetchReserves());
-    dispatch(setIsDeleting());
+    if (isDeleting) {
+      dispatch(setIsDeleting());
+    }
   }, [dispatch, isDeleting]);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      dispatch(fetchItems());
+    }
+  }, [dispatch, items.length]);
 
   const handleClick = (reserveId) => {
     dispatch(deleteReserve(reserveId));
-    dispatch(fetchReserves());
   };
 
   const handleBack = () => {
@@ -46,22 +53,13 @@ const ReservationsList = () => {
     return item ? item.image : 'Unknown';
   };
 
-  const itemDescription = (itemId) => {
-    const item = items.find((item) => item.id === itemId);
-    return item ? item.description : 'Unknown';
-  };
-
-  if (localStorage.getItem('user') !== null) {
-    dispatch(setLocalStorage(localStorage.getItem('user')));
-  }
-
   if (isLoading) {
     reserveContent = (
       <div className="container text-center d-flex justify-content-center align-items-center min-vh-100">
         <Spinner />
       </div>
     );
-  } else if (userStorage !== null) {
+  } else if (user !== null) {
     if (reserves.length > 0) {
       reserveContent = (
         <>
@@ -111,7 +109,6 @@ const ReservationsList = () => {
                       <p>{reserve.date}</p>
                     </div>
                     <p className="dots">...........</p>
-                    <p>{itemDescription(reserve.item_id)}</p>
                     <button type="button" className="btn" onClick={() => handleClick(reserve.id)} disabled={isDeleting}>
                       {`Delete ${reserve.id}`}
                     </button>
