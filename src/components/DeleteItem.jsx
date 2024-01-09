@@ -1,73 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import itemAPI from '../API/itemAPI';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchItems, deleteItem } from '../redux/items/apiItem';
+import { setIsDelete } from '../redux/items/itemSlice';
 import '../styles/deleteItem.css';
+import Spinner from './Spinner';
 
 const DeleteItem = () => {
-  const [items, setItems] = useState([]);
-  const [message, setMessage] = useState('');
-
-  const fetchItems = async () => {
-    try {
-      const response = await fetch(`${itemAPI.baseURL}${itemAPI.listItems}`, {
-        method: 'GET',
-        headers: {
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setItems(data);
-      } else {
-        setMessage('Failed to fetch items');
-      }
-    } catch (error) {
-      setMessage('Error fetching items');
-    }
-  };
+  const { isLoading, items, isDelete } = useSelector((state) => state.items);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchItems();
-  }, []);
-
-  const deleteItem = async (itemId) => {
-    try {
-      const response = await fetch(`${itemAPI.baseURL}${itemAPI.listItems}/${itemId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        setMessage('Item deleted successfully');
-        setItems(items.filter((item) => item.id !== itemId));
-      } else {
-        setMessage('Failed to delete item');
-      }
-    } catch (error) {
-      setMessage('Error deleting item');
+    dispatch(fetchItems());
+    if (isDelete) {
+      dispatch(setIsDelete());
     }
-  };
+  }, [dispatch, isDelete]);
 
   const handleDelete = (itemId) => {
-    deleteItem(itemId);
+    dispatch(deleteItem(itemId));
   };
 
   return (
     <>
-      <div className="deleteItemContent d-flex flex-column justify-content-center align-items-center w-100">
-        <div className="div-list d-flex flex-column justify-content-center align-items-center gap-2 w-50">
-          {items.map((item) => (
-            <div key={item.id} className="item d-flex justify-content-between align-items-center w-75">
-              <span>{item.name}</span>
-              <button type="submit" onClick={() => handleDelete(item.id)}>Delete</button>
+      {isLoading
+        ? (
+          <div className="deleteItemContent">
+            <div className="div-list">
+              <Spinner />
             </div>
-          ))}
-        </div>
-        <div className="div-message">
-          {message && <p>{message}</p>}
-        </div>
-      </div>
+          </div>
+        )
+        : (
+          <div className="deleteItemContent d-flex flex-column justify-content-center align-items-center w-100">
+            <div className="div-list d-flex flex-column justify-content-center align-items-center gap-2 w-50">
+              {items.map((item) => (
+                <div key={item.id} className="item d-flex justify-content-between align-items-center w-75">
+                  <span>{item.name}</span>
+                  <button type="submit" onClick={() => handleDelete(item.id)}>Delete</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
     </>
   );
 };
