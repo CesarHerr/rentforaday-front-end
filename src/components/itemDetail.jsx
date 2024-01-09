@@ -1,17 +1,23 @@
 import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setItemId } from '../redux/reserves/reserveSlice';
+import { setItemId, setSelectedCity, setSelectedItem } from '../redux/reserves/reserveSlice';
+import { setItemDetail } from '../redux/items/itemSlice';
 import '../styles/itemDetail.css';
 
 const ItemDetail = () => {
   const { itemId } = useParams();
   const numericItemId = parseInt(itemId, 10);
   const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.items);
 
-  const item = useSelector((state) => state.item.items.find((item) => item.id === numericItemId));
+  const item = useSelector((state) => state.items.items.find((item) => item.id === numericItemId));
 
   const handleItemId = () => {
     dispatch(setItemId(Number(numericItemId)));
+    dispatch(setSelectedCity(item.city));
+    const selectedItemDetail = items.find((item) => item.id === Number(numericItemId));
+    dispatch(setSelectedItem(Number(numericItemId)));
+    dispatch(setItemDetail(selectedItemDetail));
   };
 
   return (
@@ -38,7 +44,7 @@ const ItemDetail = () => {
               </tbody>
             </table>
             <div className="itemPanel w-100 d-flex flex-row justify-content-between align-items-center">
-              <Link to="/rentforaday-front-end/add_reserve" className="d-flex flex-column justify-content-center reserve-buttom" onClick={() => handleItemId()}>Reserve</Link>
+              <Link to="/rentforaday-front-end/add_reserve" className="d-flex flex-column justify-content-center reserve-buttom" onClick={handleItemId}>Reserve</Link>
               <Link to="/rentforaday-front-end/items" className="d-flex flex-column justify-content-center back-buttom">Back to items</Link>
             </div>
           </div>

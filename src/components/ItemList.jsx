@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Virtual, Navigation, Pagination } from 'swiper/modules';
 import icons from '../assets/icons';
-import { fetchItems } from '../redux/items/itemSlice';
+import { fetchItems } from '../redux/items/apiItem';
 import Spinner from './Spinner';
 
 // Swiper styles
@@ -15,7 +15,7 @@ import '../styles/ItemList.css';
 import '../styles/reservationList.css';
 
 const Item = () => {
-  const { items, isLoading } = useSelector((state) => state.item);
+  const { items, isLoading } = useSelector((state) => state.items);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let itemContent;
