@@ -2,29 +2,32 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import itemAPI from '../../API/itemAPI';
 
-let idUser = '0';
+let user = 'null';
 
 const fetchReserves = createAsyncThunk('reserves/fetchReserves', async () => {
   if (localStorage.getItem('user') !== null) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user.id !== undefined) {
-      idUser = user.id;
-    }
+    user = JSON.parse(localStorage.getItem('user'));
   }
-  const response = await axios.get(`${itemAPI.baseURL}${itemAPI.listReserves}${idUser}/appointments`);
+  const response = await axios.get(`${itemAPI.baseURL}${itemAPI.listReserves}${user.id}/appointments`);
   return response.data;
 });
 
 const deleteReserve = createAsyncThunk('reserves/deleteReserve', async (reserveId) => {
-  const response = await axios.delete(`${itemAPI.baseURL}${itemAPI.listReserves}${idUser}/appointments/${reserveId}`);
+  if (localStorage.getItem('user') !== null) {
+    user = JSON.parse(localStorage.getItem('user'));
+  }
+  const response = await axios.delete(`${itemAPI.baseURL}${itemAPI.listReserves}${user.id}/appointments/${reserveId}`);
   return response.data;
 });
 
 const postReserve = createAsyncThunk('reserves/postReserve', async (dataObject, { rejectWithValue }) => {
   try {
+    if (localStorage.getItem('user') !== null) {
+      user = JSON.parse(localStorage.getItem('user'));
+    }
     const options = {
       method: 'POST',
-      url: `${itemAPI.baseURL}${itemAPI.listReserves}${idUser}/appointments`,
+      url: `${itemAPI.baseURL}${itemAPI.listReserves}${user.id}/appointments`,
       data: dataObject,
     };
 
@@ -35,17 +38,6 @@ const postReserve = createAsyncThunk('reserves/postReserve', async (dataObject, 
   }
 });
 
-const fetchItems = createAsyncThunk('items/fetchItems', async () => {
-  if (localStorage.getItem('user') !== null) {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user.id !== undefined) {
-      idUser = user.id;
-    }
-  }
-  const response = await axios.get(`${itemAPI.baseURL}${itemAPI.listItems}`);
-  return response.data;
-});
-
 export {
-  fetchReserves, deleteReserve, postReserve, fetchItems,
+  fetchReserves, deleteReserve, postReserve,
 };
