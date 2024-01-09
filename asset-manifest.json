@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/rentforaday-front-end/static/css/main.cf96ded8.css",
-    "main.js": "/rentforaday-front-end/static/js/main.f4eebc0d.js",
+    "main.js": "/rentforaday-front-end/static/js/main.c1928541.js",
     "static/media/house-1.jpg": "/rentforaday-front-end/static/media/house-1.df7563cf480d97ac0627.jpg",
     "static/media/house-4.jpg": "/rentforaday-front-end/static/media/house-4.8815eb8c39a0dc471b4f.jpg",
     "static/media/city.jpg": "/rentforaday-front-end/static/media/city.a5f2264c6fb491185391.jpg",
@@ -14,10 +14,10 @@
     "static/media/vimeo.svg": "/rentforaday-front-end/static/media/vimeo.d1219be6ab6b1210e4a5ebdae6532787.svg",
     "static/media/facebook.svg": "/rentforaday-front-end/static/media/facebook.acd66cb0a8fe91db24c8a48265cf4f25.svg",
     "main.cf96ded8.css.map": "/rentforaday-front-end/static/css/main.cf96ded8.css.map",
-    "main.f4eebc0d.js.map": "/rentforaday-front-end/static/js/main.f4eebc0d.js.map"
+    "main.c1928541.js.map": "/rentforaday-front-end/static/js/main.c1928541.js.map"
   },
   "entrypoints": [
     "static/css/main.cf96ded8.css",
-    "static/js/main.f4eebc0d.js"
+    "static/js/main.c1928541.js"
   ]
 }
