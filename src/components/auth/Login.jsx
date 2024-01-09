@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Spinner from '../Spinner';
 
-import { loginUser } from '../../redux/users/authSlice';
+import { loginUser } from '../../redux/users/authApi';
 
 import '../../styles/Registration.css';
 

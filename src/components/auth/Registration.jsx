@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Spinner from '../Spinner';
-
-import { registerUser, clearRegistration } from '../../redux/users/authSlice';
-
+import { clearRegistration } from '../../redux/users/authSlice';
+import { registerUser } from '../../redux/users/authApi';
 import '../../styles/Registration.css';
 
 const Registration = () => {

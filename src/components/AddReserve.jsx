@@ -2,24 +2,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Spinner from './Spinner';
-import { fetchItems, postReserve } from '../redux/reserves/apiReserves';
+import { postReserve } from '../redux/reserves/apiReserves';
+import { fetchItems } from '../redux/items/apiItem';
 import {
-  setSelectedItem, setSelectedCity, setSelectedDate, setItemDetail, setIsReserved, setStatus,
+  setSelectedItem, setSelectedCity, setSelectedDate, setIsReserved, setStatus,
 } from '../redux/reserves/reserveSlice';
-import { setLocalStorage } from '../redux/users/authSlice';
+import { setItemDetail } from '../redux/items/itemSlice';
 import '../styles/addReserve.css';
 
 const AddReserve = () => {
-  const { userStorage } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let showSelect;
   let itemContent;
 
   const {
-    items, itemsByCity, isLoading, selectedItem, selectedCity, selectedDate, status,
-    itemDetail, isReserved, itemId,
+    isLoading, selectedItem, selectedCity, selectedDate, status,
+    itemId, isReserved,
   } = useSelector((state) => state.reserves);
+
+  const { items, itemsByCity, itemDetail } = useSelector((state) => state.items);
 
   // get item city by id
   const itemCity = itemId ? items.find((item) => item.id === itemId)?.city : null;
@@ -27,13 +30,14 @@ const AddReserve = () => {
   // options select city, save city state, reset isReserved state
   const handleSelectCity = (event) => {
     dispatch(setSelectedCity(event.target.value));
-    dispatch(setIsReserved());
   };
 
   // options select item, save item state, set item details by id, reset isReserved state
   const handleSelectItem = (event) => {
-    dispatch(setSelectedItem(Number(event.target.value)));
-    dispatch(setIsReserved());
+    const selectedItemID = Number(event.target.value);
+    const selectedItemDetail = items.find((item) => item.id === selectedItemID);
+    dispatch(setSelectedItem(selectedItemID));
+    dispatch(setItemDetail(selectedItemDetail));
   };
 
   // options select date, save date state, reset status state
@@ -51,16 +55,19 @@ const AddReserve = () => {
     }));
   };
 
+  useEffect(() => {
+    if (isReserved) {
+      navigate('/rentforaday-front-end/reservation_list');
+      dispatch(setIsReserved());
+    }
+  }, [isReserved, dispatch, navigate]);
+
   // fetch items and reserves
   useEffect(() => {
-    dispatch(fetchItems());
-    dispatch(setItemDetail(selectedItem));
-  }, [dispatch, selectedItem]);
-
-  // check if user is logged in
-  if (localStorage.getItem('user') !== null) {
-    dispatch(setLocalStorage(localStorage.getItem('user')));
-  }
+    if (items.length === 0) {
+      dispatch(fetchItems());
+    }
+  }, [items.length, dispatch]);
 
   // show item detail if itemDetail is true,and if status and isLoading are false
   if (status) {
@@ -122,15 +129,9 @@ const AddReserve = () => {
     );
   }
 
-  // redirect to reservation list if isReserved
-  if (isReserved) {
-    navigate('/rentforaday-front-end/reservation_list');
-    dispatch(setIsReserved());
-  }
-
   return (
     <>
-      {userStorage !== null
+      {user !== null
         ? (
           <section className="addReserve">
             <h1>Add a Reserve</h1>
