@@ -45,11 +45,6 @@ h2,
   border-bottom: 2px solid white;
 }
 
-.nav > section:nth-child(2),
-.nav > div:nth-child(2) {
-  padding-left: 10rem;
-}
-
 @media (max-width: 768px) {
   h1.slideContent__title {
     font-size: 2rem;

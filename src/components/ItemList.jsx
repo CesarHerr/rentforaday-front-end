@@ -35,12 +35,10 @@ const Item = () => {
       <>
         <div className="itemTitle d-flex flex-column align-items-center justify-content-center position-absolute start-50 translate-middle-x">
           <h1 className="text-center titleAvailable">Available Accommodations</h1>
-          <p>............</p>
         </div>
         <section className="reserves d-flex align-items-center min-vh-100">
           <img className="custom-prev-button" src={icons.ButtonGreen} alt="left" />
           <Swiper
-            className=""
             modules={[Virtual, Navigation, Pagination]}
             centeredSlides
             pagination={{
@@ -54,29 +52,28 @@ const Item = () => {
             breakpoints={{
               0: {
                 slidesPerView: 1,
-                spaceBetween: 400,
+                spaceBetween: 200,
                 allowTouchMove: true,
               },
               890: {
-                slidesPerView: 2,
+                slidesPerView: 3,
                 spaceBetween: 200,
                 allowTouchMove: false,
               },
               1180: {
                 slidesPerView: 2,
-                spaceBetween: 200,
-                allowTouchMove: false,
+                spaceBetween: 150,
+                allowTouchMove: true,
               },
             }}
           >
             {items.map((item, index) => (
               <SwiperSlide key={item.id} virtualIndex={index} className="d-flex justify-content-center align-items-center min-vh-100">
                 <li key={item.id}>
-                  <p className="fs-3 fw-bold">{item.name}</p>
-                  <img src={`${item.image}`} alt={item.name} />
+                  <p className="fs-4 fw-bold">{item.name}</p>
+                  <img src={`${item.image}`} alt={item.name} className="itemImage" />
                   <div className="reserveCity d-flex fw-bold justify-content-around mx-auto">
                     <p className="text-center">{item.city}</p>
-                    <p>{item.date}</p>
                   </div>
                   <p className="dots">...........</p>
                   <p className="reserveDescription">{item.description}</p>
@@ -106,7 +103,6 @@ const Item = () => {
   return (
     <>
       {itemContent}
-      <button type="button" className="btn position-fixed back"><img className="backa" src={icons.ButtonGreen} alt="left" /></button>
     </>
   );
 };

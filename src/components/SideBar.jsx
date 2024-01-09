@@ -29,7 +29,7 @@ const Sidebar = () => {
     <aside>
       <nav>
         <button
-          className="openBtn p-2"
+          className="openBtn p-3"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasScrolling"
@@ -43,8 +43,8 @@ const Sidebar = () => {
         </button>
         <div
           className="offcanvas offcanvas-start"
-          data-bs-scroll="true"
-          data-bs-backdrop="false"
+          data-bs-scroll="false"
+          data-bs-backdrop="true"
           tabIndex="-1"
           id="offcanvasScrolling"
           aria-labelledby="offcanvasScrollingLabel"

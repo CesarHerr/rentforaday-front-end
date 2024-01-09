@@ -22,8 +22,7 @@
 }
 
 .reserves {
-  width: 80%;
-  margin-left: 18rem;
+  width: 100%;
 
   & li {
     width: 100%;
@@ -45,6 +44,7 @@
       color: var(--mid-grey);
       font-size: 1rem;
       font-weight: bold;
+      text-align: left;
     }
 
     & img {

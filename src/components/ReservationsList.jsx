@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { Virtual, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { fetchReserves, deleteReserve } from '../redux/reserves/apiReserves';
@@ -19,7 +18,6 @@ const ReservationsList = () => {
   } = useSelector((state) => state.reserves);
   const { items } = useSelector((state) => state.items);
   const { user } = useSelector((state) => state.auth);
-  const navigate = useNavigate();
   let reserveContent;
 
   useEffect(() => {
@@ -37,10 +35,6 @@ const ReservationsList = () => {
 
   const handleClick = (reserveId) => {
     dispatch(deleteReserve(reserveId));
-  };
-
-  const handleBack = () => {
-    navigate(-1);
   };
 
   const itemName = (itemId) => {
@@ -84,7 +78,7 @@ const ReservationsList = () => {
               breakpoints={{
                 0: {
                   slidesPerView: 1,
-                  spaceBetween: 400,
+                  spaceBetween: 200,
                   allowTouchMove: true,
                 },
                 890: {
@@ -94,7 +88,7 @@ const ReservationsList = () => {
                 },
                 1180: {
                   slidesPerView: 2,
-                  spaceBetween: 200,
+                  spaceBetween: 150,
                   allowTouchMove: false,
                 },
               }}
@@ -103,7 +97,7 @@ const ReservationsList = () => {
                 <SwiperSlide key={reserve.id} virtualIndex={index} className="d-flex justify-content-center align-items-center min-vh-100">
                   <li key={reserve.id}>
                     <p className="fs-3 fw-bold">{itemName(reserve.item_id)}</p>
-                    <img src={`${itemImage(reserve.item_id)}`} alt={itemName(reserve.item_id)} />
+                    <img src={`${itemImage(reserve.item_id)}`} alt={itemName(reserve.item_id)} className="itemImage" />
                     <div className="reserveCity d-flex fw-bold justify-content-around mx-auto">
                       <p>{reserve.city}</p>
                       <p>{reserve.date}</p>
@@ -130,7 +124,6 @@ const ReservationsList = () => {
   return (
     <>
       {reserveContent}
-      <button type="button" className="btn position-fixed back" onClick={() => handleBack()}><img className="backa" src={icons.ButtonGreen} alt="left" /></button>
     </>
   );
 };
