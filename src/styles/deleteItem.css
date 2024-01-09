@@ -66,6 +66,7 @@ div.deleteItemContent button:hover {
 @media (max-width: 768px) {
   .div-list {
     width: 100%;
+
     button {
       margin-left: 0.5rem;
     }

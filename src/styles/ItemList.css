@@ -43,11 +43,12 @@ if there is 20 put 20 */
     font-size: 1.5rem;
     width: 75%;
   }
+
   .animation {
     font: bold 100% Consolas, Monaco, monospace;
   }
 
-  .itemTitle {  
+  .itemTitle {
     top: 0;
     padding-bottom: 2rem;
   }
