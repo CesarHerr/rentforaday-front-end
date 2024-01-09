@@ -32,7 +32,7 @@ const DeleteItem = () => {
         )
         : (
           <div className="deleteItemContent d-flex flex-column justify-content-center align-items-center w-100">
-            <div className="div-list d-flex flex-column justify-content-center align-items-center gap-2 w-50">
+            <div className="div-list d-flex flex-column justify-content-center align-items-center gap-2">
               {items.map((item) => (
                 <div key={item.id} className="item d-flex justify-content-between align-items-center w-75">
                   <span>{item.name}</span>

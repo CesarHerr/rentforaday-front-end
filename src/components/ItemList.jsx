@@ -56,7 +56,7 @@ const Item = () => {
                 allowTouchMove: true,
               },
               890: {
-                slidesPerView: 3,
+                slidesPerView: 1,
                 spaceBetween: 200,
                 allowTouchMove: false,
               },

@@ -23,7 +23,6 @@
 
 .itemImage {
   height: 250px;
-  border-radius: 2rem;
 }
 
 /* When you change the amount of characters in the h1, you have to change
@@ -40,8 +39,20 @@ if there is 20 put 20 */
 }
 
 @media (max-width: 768px) {
-  .itemTitle {
+  h1 {
+    font-size: 1.5rem;
+    width: 75%;
+  }
+  .animation {
+    font: bold 100% Consolas, Monaco, monospace;
+  }
+
+  .itemTitle {  
     top: 0;
     padding-bottom: 2rem;
+  }
+
+  .itemImage {
+    height: 120px;
   }
 }

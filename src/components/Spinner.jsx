@@ -1,7 +1,7 @@
 import '../styles/spinner.css';
 
 const Spinner = () => (
-  <div className="container">
+  <div className="container w-25">
     <svg className="loader" width="240" height="240" viewBox="0 0 240 240">
       <circle
         className="loader-ring loader-ring-a"
