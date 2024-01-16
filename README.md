@@ -42,7 +42,7 @@ Two repositories were created for its construction:
 - [A backend repository](https://github.com/CesarHerr/RentForADay-app) with an API built with the [Ruby on Rails](https://rubyonrails.org/) Framework with a [PostgreSQL](https://www.postgresql.org/) database.
 - [A frontend repository](https://github.com/CesarHerr/rentforaday-front-end) with a React/Redux Toolkit application from which the created API is consumed.
 
-Additionally, the API documentation is available [here](https://ren-for-day.onrender.com/api-docs/index.html).
+Additionally, the API documentation is available [here](https://rent-for-day-af7a3052c5ad.herokuapp.com/).
 
 We are a team of three students:
 - Team member 1 -   @Ruthmy - Ruth Abreu
