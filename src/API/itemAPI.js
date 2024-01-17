@@ -1,7 +1,7 @@
 // Purpose: RentForADay Item API base URL and endpoints
 
 const itemAPI = {
-  baseURL: 'https://ren-for-day.onrender.com/',
+  baseURL: 'https://rent-for-day-9756573c4a9e.herokuapp.com/',
   currentUser: 'current_user',
   login: 'login',
   logout: 'logout',

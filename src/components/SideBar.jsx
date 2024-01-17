@@ -127,7 +127,7 @@ const Sidebar = () => {
               />
               <img src={socialMediaIcons.Threads} alt="x" className="social" />
             </div>
-            <p className="text-center">@ 2023 - Microverse</p>
+            <p className="text-center">@ 2023 - Ruth - César - Nico</p>
           </div>
         </div>
       </nav>
